@@ -5,9 +5,6 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QDMarketPlace.WebApp", "QDMarketPlace.WebApp\QDMarketPlace.WebApp.csproj", "{578C04AE-358E-4082-900B-DE0C52BEE98A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QDMarketPlace.Data", "QDMarketPlace.Data\QDMarketPlace.Data.csproj", "{33A9BD58-A248-4D65-BF27-A7F34099243C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QDMarketPlace.Application", "QDMarketPlace.Application\QDMarketPlace.Application.csproj", "{B8371D44-AC51-4C3C-8385-C4FAD1753096}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +16,7 @@ Global
 		{578C04AE-358E-4082-900B-DE0C52BEE98A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{578C04AE-358E-4082-900B-DE0C52BEE98A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{578C04AE-358E-4082-900B-DE0C52BEE98A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33A9BD58-A248-4D65-BF27-A7F34099243C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33A9BD58-A248-4D65-BF27-A7F34099243C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33A9BD58-A248-4D65-BF27-A7F34099243C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33A9BD58-A248-4D65-BF27-A7F34099243C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8371D44-AC51-4C3C-8385-C4FAD1753096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8371D44-AC51-4C3C-8385-C4FAD1753096}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8371D44-AC51-4C3C-8385-C4FAD1753096}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8371D44-AC51-4C3C-8385-C4FAD1753096}.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
