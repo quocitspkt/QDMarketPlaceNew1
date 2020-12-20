@@ -5,13 +5,14 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("ProductAttributes")]
+    
     public class ProductAttribute 
     {
+        public int Id { get; set; }
         public int ProductId { get; set; }
         public int AttributeValueId { get; set; }
 
-        public virtual Product Product { get; set; }
-        public virtual AttributeValue AttributeValue { get; set; }
+        public Product Product { get; set; }
+        public AttributeValue AttributeValue { get; set; }
     }
 }

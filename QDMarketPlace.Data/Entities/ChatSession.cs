@@ -6,9 +6,10 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("ChatSessions")]
+    
     public class ChatSession 
     {
+        public int Id { get; set; }
         public int BuyerId { get; set; }
 
         public int SellerId { get; set; }
@@ -29,11 +30,11 @@ namespace QDMarketPlace.Data.Entities
         public Status Status { get; set; }
 
         public int OrderId { get; set; }
-        [ForeignKey("OrderId")]
-        public virtual Order Order { get; set; }
+        //[ForeignKey("OrderId")]
+        public Order Order { get; set; }
 
-        [ForeignKey("ProductId")]
-        public virtual Product Product { get; set; }
+        //[ForeignKey("ProductId")]
+        public Product Product { get; set; }
 
 
 

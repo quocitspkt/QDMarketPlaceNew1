@@ -6,21 +6,12 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("Permissions")]
+    
     public class Permission 
     {
-        public Permission() { }
-        public Permission(Guid roleId, string functionId, bool canCreate,
-            bool canRead, bool canUpdate, bool canDelete)
-        {
-            RoleId = roleId;
-            FunctionId = functionId;
-            CanCreate = canCreate;
-            CanRead = canRead;
-            CanUpdate = canUpdate;
-            CanDelete = canDelete;
-        }
-        [Required]
+        
+        public int Id { get; set; }
+        //[Required]
         public Guid RoleId { get; set; }
 
         /*[StringLength(128)]
@@ -35,10 +26,10 @@ namespace QDMarketPlace.Data.Entities
         public bool CanDelete { set; get; }
 
 
-        [ForeignKey("RoleId")]
-        public virtual AppRole AppRole { get; set; }
+        //[ForeignKey("RoleId")]
+        //public virtual AppRole AppRole { get; set; }
 
-        [ForeignKey("FunctionId")]
-        public virtual Function Function { get; set; }
+        //[ForeignKey("FunctionId")]
+        public Function Function { get; set; }
     }
 }

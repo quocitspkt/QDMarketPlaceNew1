@@ -7,17 +7,18 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("Shops")]
+    
     public class Shop 
     {
-        [StringLength(250)]
+        public int Id { get; set; }
+        //[StringLength(250)]
 
         public string Name { get; set; }
 
 
         public string Description { get; set; }
 
-        [StringLength(250)]
+        //[StringLength(250)]
 
         public string Image { get; set; }
 
@@ -29,8 +30,9 @@ namespace QDMarketPlace.Data.Entities
         public Status Status { get; set; }
         public Guid OwnerId { get; set; }
 
-        [ForeignKey("OwnerId")]
-        public virtual AppUser AppUser { get; set; }
+        //[ForeignKey("OwnerId")]
+        //public virtual AppUser AppUser { get; set; }
+        public ICollection<Certificate> Certificates { get; set; }
 
     }
 }

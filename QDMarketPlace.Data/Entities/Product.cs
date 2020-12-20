@@ -8,47 +8,48 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("Products")]
+    
     public class Product 
     {
-        [Required]
-        [StringLength(128)]
+        public int Id { get; set; }
+        //[Required]
+        //[StringLength(128)]
 
         public string Name { get; set; }
 
-        [Required]
+        //[Required]
         public int CategoryId { get; set; }
 
-        [StringLength(250)]
+        //[StringLength(250)]
 
         public string Description { get; set; }
 
 
         public string Content { get; set; }
 
-        [Required]
-        [DefaultValue(0)]
+        //[Required]
+        //[DefaultValue(0)]
         public decimal Price { get; set; }
 
         public decimal? PromotionPrice { get; set; }
 
-        [Required]
+        //[Required]
         public decimal OriginalPrice { get; set; }
 
-        [StringLength(255)]
+        //[StringLength(255)]
         public string Image { get; set; }
 
-        [StringLength(255)]
+        //[StringLength(255)]
         public string ThumbImage { get; set; }
 
-        [StringLength(255)]
+        //[StringLength(255)]
         public string ImageList { get; set; }
 
         public int? ViewCount { get; set; }
 
         public int Varranty { get; set; }
 
-        [StringLength(255)]
+        //[StringLength(255)]
         public string Video { get; set; }
 
         public int UserCreated { get; set; }
@@ -61,16 +62,16 @@ namespace QDMarketPlace.Data.Entities
 
         public DateTime DateModified { get; set; }
 
-        [StringLength(128)]
+        //[StringLength(128)]
         public string SeoPageTitle { get; set; }
 
-        [StringLength(128)]
+        //[StringLength(128)]
         public string SeoAlias { get; set; }
 
-        [StringLength(158)]
+        //[StringLength(158)]
         public string SeoKeyWord { get; set; }
 
-        [StringLength(158)]
+        //[StringLength(158)]
         public string SeoDescription { get; set; }
 
         public bool IsDeleted { get; set; }
@@ -82,8 +83,14 @@ namespace QDMarketPlace.Data.Entities
 
         public Guid OwnerId { get; set; }
 
-        [ForeignKey("CategoryId")]
-        public virtual ProductCategory ProductCategory { get; set; }
+        //[ForeignKey("CategoryId")]
+        public ProductCategory ProductCategory { get; set; }
+        public ICollection<ChatSession> ChatSessions { get; set; }
+        public ICollection<FeedBack> FeedBacks { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<ProductAttribute> ProductAttributes { get; set; }
+        public ICollection<ProductTag> ProductTags { get; set; }
+
 
     }
 }

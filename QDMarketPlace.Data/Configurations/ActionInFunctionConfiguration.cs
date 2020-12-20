@@ -13,6 +13,8 @@ namespace QDMarketPlace.Data.Configurations
         {
             builder.ToTable("ActionInFunctions");
             builder.HasKey(x => x.Id);
+            builder.HasOne(x => x.Function).WithMany(x => x.ActionInFunctions).HasForeignKey(x => x.FunctionId);
+            builder.HasOne(x => x.DoAction).WithMany(x => x.ActionInFunctions).HasForeignKey(x => x.ActionId);
         }
     }
 }

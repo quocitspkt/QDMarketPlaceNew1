@@ -6,17 +6,17 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("ProductTags")]
+    
     public class ProductTag 
     {
         public int ProductId { get; set; }
-        [StringLength(50)]
+        //[StringLength(50)]
 
         public string TagId { get; set; }
 
-        [ForeignKey("ProductId")]
-        public virtual Product Product { set; get; }
-        [ForeignKey("TagId")]
-        public virtual Tag Tag { get; set; }
+        //[ForeignKey("ProductId")]
+        public Product Product { set; get; }
+        //[ForeignKey("TagId")]
+        public Tag Tag { get; set; }
     }
 }

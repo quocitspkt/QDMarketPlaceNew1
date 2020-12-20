@@ -7,10 +7,11 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("PostCategories")]
-    public class PostCategory 
+    
+    public class PostCategory
     {
-        [StringLength(250)]
+        public int Id { get; set; }
+        //[StringLength(250)]
 
         public string Name { get; set; }
 
@@ -18,18 +19,19 @@ namespace QDMarketPlace.Data.Entities
 
         public Status Status { get; set; }
 
-        [StringLength(158)]
+        //[StringLength(158)]
 
         public string SeoPageTitle { get; set; }
 
-        [StringLength(128)]
+        //[StringLength(128)]
 
         public string SeoAlias { get; set; }
-        [StringLength(158)]
+        //[StringLength(158)]
 
         public string SeoKeyWord { get; set; }
-        [StringLength(158)]
+        //[StringLength(158)]
 
         public string SeoDescription { get; set; }
+        public ICollection<PostInCategory> PostInCategories { get; set; }
     }
 }

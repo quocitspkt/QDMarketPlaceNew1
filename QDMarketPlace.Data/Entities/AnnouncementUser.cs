@@ -6,26 +6,19 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("AnnouncementUsers")]
+    
     public class AnnouncementUser 
     {
-        public AnnouncementUser() { }
-        public AnnouncementUser(string announcementId, Guid userId, bool? hasRead)
-        {
-            AnnouncementId = announcementId;
-            UserId = userId;
-            HasRead = hasRead;
-        }
-
-        [StringLength(128)]
-        [Required]
+        public int Id { get; set; }
+        
+        //[Required]
         public string AnnouncementId { get; set; }
 
         public Guid UserId { get; set; }
 
         public bool? HasRead { get; set; }
 
-        [ForeignKey("AnnouncementId")]
-        public virtual Announcement Announcement { get; set; }
+        //[ForeignKey("AnnouncementId")]
+        public Announcement Announcement { get; set; }
     }
 }

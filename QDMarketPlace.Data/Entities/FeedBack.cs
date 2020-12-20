@@ -6,9 +6,10 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("FeedBacks")]
+    
     public class FeedBack 
     {
+        public int Id { get; set; }
         public int ProductId { get; set; }
 
 
@@ -24,10 +25,10 @@ namespace QDMarketPlace.Data.Entities
 
         public Status Status { get; set; }
 
-        [ForeignKey("OwnerId")]
-        public virtual AppUser AppUser { get; set; }
+        //[ForeignKey("OwnerId")]
+        //public virtual AppUser AppUser { get; set; }
 
-        [ForeignKey("ProductId")]
-        public virtual Product Product { get; set; }
+        //[ForeignKey("ProductId")]
+        public Product Product { get; set; }
     }
 }

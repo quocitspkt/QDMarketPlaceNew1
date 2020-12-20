@@ -6,31 +6,12 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("ProductCategories")]
+    
     public class ProductCategory 
     {
-        public ProductCategory()
-        {
-            Products = new List<Product>();
-        }
-        public ProductCategory(string name, string description, int? parentId, int? homeOrder, bool? homeFlag, string seoPageTitle, string seoAlias, string seoKeyWord,
-            string seoDescription, Status status, DateTime dateCreated, DateTime dateModified, int sortOrder)
-        {
-            Name = name;
-            Description = description;
-            ParentId = parentId;
-            HomeOrder = homeOrder;
-            HomeFlag = homeFlag;
-            SeoPageTitle = seoPageTitle;
-            SeoAlias = seoAlias;
-            SeoKeyWord = seoKeyWord;
-            SeoDescription = seoDescription;
-            Status = status;
-            DateCreated = dateCreated;
-            DateModified = dateModified;
-            SortOrder = sortOrder;
-
-        }
+        
+        
+        public int Id { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }
@@ -59,6 +40,7 @@ namespace QDMarketPlace.Data.Entities
 
         public int SortOrder { set; get; }
 
-        public virtual ICollection<Product> Products { set; get; }
+        public  ICollection<Product> Products { set; get; }
+        
     }
 }

@@ -6,15 +6,17 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("AttributeValues")]
+    
     public class AttributeValue 
-    { 
+    {
+        public int Id { get; set; }
         public int AttributeId { get; set; }
 
-        [StringLength(128)]
+        //[StringLength(128)]
 
         public string Name { get; set; }
 
-        public virtual CustomAttribute CustomAttribute { get; set; }
+        public CustomAttribute CustomAttribute { get; set; }
+        public ICollection<ProductAttribute> ProductAttributes { get; set; }
     }
 }

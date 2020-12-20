@@ -6,14 +6,16 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("DoActions")]
+    
     public class DoAction 
     {
-        [StringLength(50)]
+        public int Id { get; set; }
+        //[StringLength(50)]
 
         public string Code { get; set; }
-        [StringLength(50)]
+        //[StringLength(50)]
 
         public string Name { get; set; }
+        public ICollection<ActionInFunction> ActionInFunctions { get; set; }
     }
 }

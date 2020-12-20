@@ -6,11 +6,14 @@ using System.Text;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("Tags")]
+   
     public class Tag 
     {
-        [StringLength(250)]
+        public string Id { get; set; }
+        //[StringLength(250)]
 
         public string Name { get; set; }
+        public ICollection<PostInTag> PostInTags { get; set; }
+        public ICollection<ProductTag> ProductTags { get; set; }
     }
 }
