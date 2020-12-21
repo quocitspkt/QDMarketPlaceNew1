@@ -22,7 +22,7 @@ namespace QDMarketPlace.Data.Entities
         public Guid UserId { set; get; }
 
         //[ForeignKey("UserId")]
-        //public virtual AppUser AppUser { get; set; }
+        public AppUser AppUser { get; set; }
 
         public ICollection<AnnouncementUser> AnnouncementUsers { get; set; }
         public DateTime DateCreated { set; get; }

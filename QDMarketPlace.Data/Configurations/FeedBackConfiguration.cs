@@ -14,7 +14,7 @@ namespace QDMarketPlace.Data.Configurations
             builder.ToTable("FeedBacks");
             builder.HasKey(x => x.Id);
             builder.HasOne(x => x.Product).WithMany(x => x.FeedBacks).HasForeignKey(x => x.ProductId);
-            
+            builder.HasOne(x => x.AppUser).WithMany(x => x.FeedBacks).HasForeignKey(x => x.OwnerId);
 
 
         }

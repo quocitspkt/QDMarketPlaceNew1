@@ -1,12 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using QDMarketPlace.Data.Configurations;
+using QDMarketPlace.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace QDMarketPlace.Data.EF
 {
-    public  class QDMarketPlaceDbContext:DbContext
+    public  class QDMarketPlaceDbContext: IdentityDbContext<AppUser,AppRole,Guid>
     {
         public QDMarketPlaceDbContext(DbContextOptions options):base(options)
         {
@@ -38,6 +41,19 @@ namespace QDMarketPlace.Data.EF
             modelBuilder.ApplyConfiguration(new ProductTagConfiguration());
             modelBuilder.ApplyConfiguration(new ShopConfiguration());
             modelBuilder.ApplyConfiguration(new TagConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new CartConfiguration());
+            
+
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
+            //Data_Seeding
+            //modelBuilder.Entity<AppConfig>
             //base.OnModelCreating(modelBuilder);
         }    
     }

@@ -31,7 +31,7 @@ namespace QDMarketPlace.Data.Entities
         public Guid OwnerId { get; set; }
 
         //[ForeignKey("OwnerId")]
-        //public virtual AppUser AppUser { get; set; }
+        public AppUser AppUser { get; set; }
         public ICollection<Certificate> Certificates { get; set; }
 
     }

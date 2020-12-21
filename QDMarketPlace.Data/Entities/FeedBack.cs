@@ -26,7 +26,7 @@ namespace QDMarketPlace.Data.Entities
         public Status Status { get; set; }
 
         //[ForeignKey("OwnerId")]
-        //public virtual AppUser AppUser { get; set; }
+        public AppUser AppUser { get; set; }
 
         //[ForeignKey("ProductId")]
         public Product Product { get; set; }

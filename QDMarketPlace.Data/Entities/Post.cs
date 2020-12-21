@@ -68,7 +68,7 @@ namespace QDMarketPlace.Data.Entities
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
         //[ForeignKey("OwnerId")]
-        //public virtual AppUser AppUser { get; set; }
+        public AppUser AppUser { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<PostInCategory> PostInCategories { get; set; }
         public ICollection<PostInTag> PostInTags { get; set; }

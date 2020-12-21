@@ -90,6 +90,7 @@ namespace QDMarketPlace.Data.Entities
         public ICollection<OrderDetail> OrderDetails { get; set; }
         public ICollection<ProductAttribute> ProductAttributes { get; set; }
         public ICollection<ProductTag> ProductTags { get; set; }
+        public ICollection<Cart>Carts { get; set; }
 
 
     }

@@ -16,6 +16,7 @@ namespace QDMarketPlace.Data.Configurations
             builder.Property(x => x.Name).HasMaxLength(250).IsUnicode();
             builder.Property(x => x.Description).HasMaxLength(500).IsUnicode();
             builder.Property(x => x.Thumbnail).HasMaxLength(250);
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Posts).HasForeignKey(x => x.OwnerId);
 
 
 
