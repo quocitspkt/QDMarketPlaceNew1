@@ -1,11 +1,11 @@
-﻿using QDMarketPlace.Application.Catalog.Dtos;
+﻿using QDMarketPlace.ViewModels.Catalog.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace QDMarketPlace.Application.Catalog.Products.Dtos.Manage
+namespace QDMarketPlace.ViewModels.Catalog.Products
 {
-    public class GetProductPagingRequest : PagingRequestBase
+    public class GetManageProductPagingRequest : PagingRequestBase
     {
         public string Keyword { get; set; }
 

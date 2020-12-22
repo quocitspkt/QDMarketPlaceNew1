@@ -45,6 +45,7 @@ namespace QDMarketPlace.Data.EF
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new CartConfiguration());
             modelBuilder.ApplyConfiguration(new ProductInCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
 
 
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
@@ -87,5 +88,6 @@ namespace QDMarketPlace.Data.EF
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ProductTranslation> ProductTranslations { get; set; }
         public DbSet<ProductInCategory> ProductInCategories { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
     }
 }

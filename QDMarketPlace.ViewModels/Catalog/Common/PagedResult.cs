@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QDMarketPlace.Application.Catalog.Dtos
+namespace QDMarketPlace.ViewModels.Catalog.Common
 {
     public class PagedResult<T>
     {
