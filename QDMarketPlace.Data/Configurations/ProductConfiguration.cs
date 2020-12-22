@@ -24,7 +24,8 @@ namespace QDMarketPlace.Data.Configurations
             builder.Property(x => x.SeoAlias).HasMaxLength(128).IsUnicode(false);
             builder.Property(x => x.SeoDescription).HasMaxLength(158).IsUnicode(false);
             builder.Property(x => x.SeoKeyWord).HasMaxLength(158).IsUnicode(false);
-            builder.HasOne(x => x.ProductCategory).WithMany(x => x.Products).HasForeignKey(x => x.CategoryId);
+            
+            //builder.HasOne(x => x.ProductCategory).WithMany(x => x.Products).HasForeignKey(x => x.CategoryId);
 
         }
     }

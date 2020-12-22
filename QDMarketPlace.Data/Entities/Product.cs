@@ -22,10 +22,11 @@ namespace QDMarketPlace.Data.Entities
 
         //[StringLength(250)]
 
-        public string Description { get; set; }
+        //public string Description { get; set; }
 
 
-        public string Content { get; set; }
+        //public string Content { get; set; }
+        public int Stock { get; set; }
 
         //[Required]
         //[DefaultValue(0)]
@@ -84,13 +85,15 @@ namespace QDMarketPlace.Data.Entities
         public Guid OwnerId { get; set; }
 
         //[ForeignKey("CategoryId")]
-        public ProductCategory ProductCategory { get; set; }
+        //public ProductCategory ProductCategory { get; set; }
         public ICollection<ChatSession> ChatSessions { get; set; }
         public ICollection<FeedBack> FeedBacks { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
         public ICollection<ProductAttribute> ProductAttributes { get; set; }
         public ICollection<ProductTag> ProductTags { get; set; }
         public ICollection<Cart>Carts { get; set; }
+        public ICollection<ProductTranslation> ProductTranslations { get; set; }
+        public ICollection<ProductInCategory> ProductInCategories { get; set; }
 
 
     }
