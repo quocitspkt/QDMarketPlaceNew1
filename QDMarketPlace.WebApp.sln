@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QDMarketPlace.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QDMarketPlace.BackendApi", "QDMarketPlace.BackendApi\QDMarketPlace.BackendApi.csproj", "{49625130-0AF9-4691-BAC6-21520D610245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QDMarketPlace.Utilities", "QDMarketPlace.Utilities\QDMarketPlace.Utilities.csproj", "{CA65BADA-FCAB-40C0-948C-C84C83311A90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QDMarketPlace.Utilities", "QDMarketPlace.Utilities\QDMarketPlace.Utilities.csproj", "{CA65BADA-FCAB-40C0-948C-C84C83311A90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QDMarketPlace.ViewModels", "QDMarketPlace.ViewModels\QDMarketPlace.ViewModels.csproj", "{F63162A0-D3B4-49CA-AEC2-4A1C6373118E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CA65BADA-FCAB-40C0-948C-C84C83311A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA65BADA-FCAB-40C0-948C-C84C83311A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA65BADA-FCAB-40C0-948C-C84C83311A90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63162A0-D3B4-49CA-AEC2-4A1C6373118E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63162A0-D3B4-49CA-AEC2-4A1C6373118E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63162A0-D3B4-49CA-AEC2-4A1C6373118E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63162A0-D3B4-49CA-AEC2-4A1C6373118E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

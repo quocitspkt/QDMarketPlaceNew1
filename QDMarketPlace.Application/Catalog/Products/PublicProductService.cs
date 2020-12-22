@@ -1,24 +1,23 @@
-﻿using QDMarketPlace.Application.Catalog.Dtos;
-using QDMarketPlace.Application.Catalog.Products.Dtos;
+﻿using Microsoft.EntityFrameworkCore;
 using QDMarketPlace.Data.EF;
-using System;
+using QDMarketPlace.ViewModels.Catalog.Common;
+using QDMarketPlace.ViewModels.Catalog.Products;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using QDMarketPlace.Application.Catalog.Products.Dtos.Public;
+using System.Threading.Tasks;
 
 namespace QDMarketPlace.Application.Catalog.Products
 {
     public class PublicProductService : IPublicProductService
     {
         private readonly QDMarketPlaceDbContext _context;
+
         public PublicProductService(QDMarketPlaceDbContext context)
         {
             _context = context;
         }
-        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetProductPagingRequest request)
+
+        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
         {
             //1. Select join
             var query = from p in _context.Products
@@ -43,7 +42,7 @@ namespace QDMarketPlace.Application.Catalog.Products
                     DateCreated = x.p.DateCreated,
                     Description = x.pt.Description,
                     Details = x.pt.Details,
-                    
+
                     OriginalPrice = x.p.OriginalPrice,
                     Price = x.p.Price,
                     SeoAlias = x.pt.SeoAlias,
@@ -61,7 +60,5 @@ namespace QDMarketPlace.Application.Catalog.Products
             };
             return pagedResult;
         }
-
-
     }
 }

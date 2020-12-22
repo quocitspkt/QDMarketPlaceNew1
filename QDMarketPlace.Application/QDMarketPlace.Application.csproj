@@ -1,12 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\QDMarketPlace.Data\QDMarketPlace.Data.csproj" />
     <ProjectReference Include="..\QDMarketPlace.Utilities\QDMarketPlace.Utilities.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.ViewModels\QDMarketPlace.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
