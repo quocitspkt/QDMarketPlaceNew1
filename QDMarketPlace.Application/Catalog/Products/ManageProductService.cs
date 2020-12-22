@@ -5,6 +5,7 @@ using QDMarketPlace.Data.EF;
 using QDMarketPlace.Data.Entities;
 using QDMarketPlace.Utilities.Exceptions;
 using QDMarketPlace.ViewModels.Catalog.Common;
+using QDMarketPlace.ViewModels.Catalog.ProductImages;
 using QDMarketPlace.ViewModels.Catalog.Products;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,6 @@ namespace QDMarketPlace.Application.Catalog.Products
             _storageService = storageService;
         }
 
-        public Task<int> AddImages(int productId, List<IFormFile> files)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task AddViewcount(int productId)
         {
             var product = await _context.Products.FindAsync(productId);
@@ -42,11 +38,13 @@ namespace QDMarketPlace.Application.Catalog.Products
         {
             var product = new Product()
             {
+                Name = request.Name,
                 Price = request.Price,
                 OriginalPrice = request.OriginalPrice,
                 Stock = request.Stock,
                 ViewCount = 0,
                 DateCreated = DateTime.Now,
+                Image = "null",
                 ProductTranslations = new List<ProductTranslation>()
                 {
                     new ProductTranslation()
@@ -79,6 +77,20 @@ namespace QDMarketPlace.Application.Catalog.Products
             await _context.SaveChangesAsync();
             return product.Id;
             
+        }
+
+        public async Task<bool> InsertProductInCategory(int productId, int categoryId)
+        {
+            var productInCategory = new ProductInCategory()
+            {
+                ProductId = productId,
+                CategoryId = categoryId
+            };
+           
+            _context.ProductInCategories.Add(productInCategory);
+            await _context.SaveChangesAsync();
+            return true;
+
         }
 
         public async Task<int> Delete(int productId)
@@ -135,7 +147,8 @@ namespace QDMarketPlace.Application.Catalog.Products
                     SeoDescription = x.pt.SeoDescription,
                     SeoPageTitle = x.pt.SeoPageTitle,
                     Stock = x.p.Stock,
-                    ViewCount = x.p.ViewCount
+                    ViewCount = x.p.ViewCount,
+                    Image = "null"
                 }).ToListAsync();
 
             ////4. Select and projection
@@ -147,14 +160,34 @@ namespace QDMarketPlace.Application.Catalog.Products
             return pagedResult;
         }
 
-        public Task<List<ProductImageViewModel>> GetListImage(int productId)
+        public async Task<ProductViewModel> GetById(int productId)
         {
-            throw new NotImplementedException();
-        }
+            var query = from p in _context.Products
+                        join pt in _context.ProductTranslations on p.Id equals pt.ProductId
+                        join pic in _context.ProductInCategories on p.Id equals pic.ProductId
+                        join c in _context.ProductCategories on pic.CategoryId equals c.Id
+                        select new { p, pt, pic };
 
-        public Task<int> RemoveImages(int imageId)
-        {
-            throw new NotImplementedException();
+            query = query.Where(x => x.p.Id == productId);
+            var data = await query.Select(x => new ProductViewModel()
+                {
+                    Id = x.p.Id,
+                    Name = x.pt.Name,
+                    DateCreated = x.p.DateCreated,
+                    Description = x.pt.Description,
+                    Details = x.pt.Details,
+
+                    OriginalPrice = x.p.OriginalPrice,
+                    Price = x.p.Price,
+                    SeoAlias = x.pt.SeoAlias,
+                    SeoDescription = x.pt.SeoDescription,
+                    SeoPageTitle = x.pt.SeoPageTitle,
+                    Stock = x.p.Stock,
+                    ViewCount = x.p.ViewCount,
+                    Image = "null"
+            }).FirstOrDefaultAsync();
+
+            return data;
         }
 
         public async Task<int> Update(ProductUpdateRequest request)
@@ -164,7 +197,7 @@ namespace QDMarketPlace.Application.Catalog.Products
             );
 
             if (product == null || productTranslations == null) throw new QDMarketException($"Cannot find a product with id: {request.Id}");
-
+            product.Name = request.Name;
             productTranslations.Name = request.Name;
             productTranslations.SeoAlias = request.SeoAlias;
             productTranslations.SeoDescription = request.SeoDescription;
@@ -188,11 +221,6 @@ namespace QDMarketPlace.Application.Catalog.Products
             
         }
 
-        public Task<int> UpdateImage(int imageId, string caption, bool isDefault)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> UpdatePrice(int productId, decimal newPrice)
         {
             var product = await _context.Products.FindAsync(productId);
@@ -214,6 +242,100 @@ namespace QDMarketPlace.Application.Catalog.Products
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
             await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
             return fileName;
+        }
+
+        public async Task<int> AddImage(int productId, ProductImageCreateRequest request)
+        {
+            var productImge = new ProductImage()
+            {
+                Caption = request.Caption,
+                DateCreated = DateTime.Now,
+                IsDefault = request.IsDefault,
+                ProductId = productId,
+                SortOrder = request.SortOrder
+            };
+
+            if (request.ImageFile != null)
+            {
+                productImge.FileSize = request.ImageFile.Length;
+                productImge.ImagePath = await this.SaveFile(request.ImageFile);
+            }
+            _context.ProductImages.Add(productImge);
+            await _context.SaveChangesAsync();
+            return productImge.Id;
+        }
+
+        public async Task<int> RemoveImage(int imageId)
+        {
+            var productImge = await _context.ProductImages.FindAsync(imageId);
+
+            if (productImge == null)
+            {
+                throw new QDMarketException($"Cannot find the image with id {imageId}");
+            }
+
+            _context.ProductImages.Remove(productImge);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> UpdateImage(int imageId, ProductImageUpdateRequest request)
+        {
+            var productImge = await _context.ProductImages.FindAsync(imageId);
+
+            if (productImge == null)
+            {
+                throw new QDMarketException($"Cannot find the image with id {imageId}");
+            }
+
+            productImge.Caption = request.Caption;
+            productImge.IsDefault = request.IsDefault;
+            productImge.SortOrder = request.SortOrder;
+
+            if (request.ImageFile != null)
+            {
+                productImge.FileSize = request.ImageFile.Length;
+                productImge.ImagePath = await this.SaveFile(request.ImageFile);
+            }
+            _context.ProductImages.Update(productImge);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<ProductImageViewModel>> GetListImages(int productId)
+        {
+            return await _context.ProductImages.Where(x => x.ProductId == productId)
+                .Select(i => new ProductImageViewModel()
+                {
+                    Caption = i.Caption,
+                    DateCreated = i.DateCreated,
+                    FileSize = i.FileSize,
+                    Id = i.Id,
+                    ImagePath = i.ImagePath,
+                    IsDefault = i.IsDefault,
+                    ProductId = i.ProductId,
+                    SortOrder = i.SortOrder
+                }).ToListAsync();
+        }
+
+        public async Task<ProductImageViewModel> GetImageById(int imageId)
+        {
+            var productImage = await _context.ProductImages.FindAsync(imageId);
+           
+            if (productImage == null)
+            {
+                throw new QDMarketException($"Cannot find the image with id {imageId}");
+            }
+            var image = new ProductImageViewModel()
+                {
+                    Caption = productImage.Caption,
+                    DateCreated = productImage.DateCreated,
+                    FileSize = productImage.FileSize,
+                    Id = productImage.Id,
+                    ImagePath = productImage.ImagePath,
+                    IsDefault = productImage.IsDefault,
+                    ProductId = productImage.ProductId,
+                    SortOrder = productImage.SortOrder
+                };
+            return image;
         }
     }
 }

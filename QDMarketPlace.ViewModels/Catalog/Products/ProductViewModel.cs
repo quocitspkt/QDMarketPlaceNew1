@@ -20,6 +20,7 @@ namespace QDMarketPlace.ViewModels.Catalog.Products
         public string SeoPageTitle { set; get; }
 
         public string SeoAlias { get; set; }
+        public string Image { get; set; }
 
     }
 }
