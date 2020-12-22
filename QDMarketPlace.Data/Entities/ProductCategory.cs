@@ -41,6 +41,6 @@ namespace QDMarketPlace.Data.Entities
         public int SortOrder { set; get; }
 
         public  ICollection<Product> Products { set; get; }
-        
+        public ICollection<ProductInCategory> ProductInCategories { get; set; }
     }
 }

@@ -412,8 +412,7 @@ namespace QDMarketPlace.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 128, nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
+                    Stock = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false, defaultValue: 0m),
                     PromotionPrice = table.Column<decimal>(nullable: true),
                     OriginalPrice = table.Column<decimal>(nullable: false, defaultValue: 0m),
@@ -435,17 +434,18 @@ namespace QDMarketPlace.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     SortOrder = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    OwnerId = table.Column<Guid>(nullable: false)
+                    OwnerId = table.Column<Guid>(nullable: false),
+                    ProductCategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_ProductCategories_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_Products_ProductCategories_ProductCategoryId",
+                        column: x => x.ProductCategoryId,
                         principalTable: "ProductCategories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -717,6 +717,30 @@ namespace QDMarketPlace.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductInCategories",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductInCategories", x => new { x.CategoryId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_ProductInCategories_ProductCategories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "ProductCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductInCategories_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductTags",
                 columns: table => new
                 {
@@ -736,6 +760,31 @@ namespace QDMarketPlace.Data.Migrations
                         name: "FK_ProductTags_Tags_TagId",
                         column: x => x.TagId,
                         principalTable: "Tags",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductTranslations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Details = table.Column<string>(nullable: true),
+                    SeoDescription = table.Column<string>(nullable: true),
+                    SeoPageTitle = table.Column<string>(nullable: true),
+                    SeoAlias = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductTranslations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductTranslations_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -851,14 +900,24 @@ namespace QDMarketPlace.Data.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
+                name: "IX_ProductInCategories_ProductId",
+                table: "ProductInCategories",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_ProductCategoryId",
                 table: "Products",
-                column: "CategoryId");
+                column: "ProductCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductTags_TagId",
                 table: "ProductTags",
                 column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductTranslations_ProductId",
+                table: "ProductTranslations",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shops_OwnerId",
@@ -923,7 +982,13 @@ namespace QDMarketPlace.Data.Migrations
                 name: "ProductAttributes");
 
             migrationBuilder.DropTable(
+                name: "ProductInCategories");
+
+            migrationBuilder.DropTable(
                 name: "ProductTags");
+
+            migrationBuilder.DropTable(
+                name: "ProductTranslations");
 
             migrationBuilder.DropTable(
                 name: "DoActions");
@@ -950,10 +1015,10 @@ namespace QDMarketPlace.Data.Migrations
                 name: "AttributeValues");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Tags");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "AppUsers");

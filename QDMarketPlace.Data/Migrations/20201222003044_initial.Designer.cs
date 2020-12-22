@@ -10,7 +10,7 @@ using QDMarketPlace.Data.EF;
 namespace QDMarketPlace.Data.Migrations
 {
     [DbContext(typeof(QDMarketPlaceDbContext))]
-    [Migration("20201221215224_initial")]
+    [Migration("20201222003044_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -833,17 +833,11 @@ namespace QDMarketPlace.Data.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateModified")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -874,6 +868,9 @@ namespace QDMarketPlace.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0m);
+
+                    b.Property<int?>("ProductCategoryId")
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("PromotionPrice")
                         .HasColumnType("decimal(18,2)");
@@ -907,6 +904,9 @@ namespace QDMarketPlace.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
                     b.Property<string>("ThumbImage")
                         .HasColumnType("varchar(255)")
                         .HasMaxLength(255)
@@ -932,7 +932,7 @@ namespace QDMarketPlace.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("ProductCategoryId");
 
                     b.ToTable("Products");
                 });
@@ -1027,6 +1027,21 @@ namespace QDMarketPlace.Data.Migrations
                     b.ToTable("ProductCategories");
                 });
 
+            modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductInCategory", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoryId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductInCategories");
+                });
+
             modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductTag", b =>
                 {
                     b.Property<int>("ProductId")
@@ -1040,6 +1055,41 @@ namespace QDMarketPlace.Data.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("ProductTags");
+                });
+
+            modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductTranslation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SeoAlias")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SeoDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SeoPageTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductTranslations");
                 });
 
             modelBuilder.Entity("QDMarketPlace.Data.Entities.Shop", b =>
@@ -1278,11 +1328,9 @@ namespace QDMarketPlace.Data.Migrations
 
             modelBuilder.Entity("QDMarketPlace.Data.Entities.Product", b =>
                 {
-                    b.HasOne("QDMarketPlace.Data.Entities.ProductCategory", "ProductCategory")
+                    b.HasOne("QDMarketPlace.Data.Entities.ProductCategory", null)
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductCategoryId");
                 });
 
             modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductAttribute", b =>
@@ -1300,6 +1348,21 @@ namespace QDMarketPlace.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductInCategory", b =>
+                {
+                    b.HasOne("QDMarketPlace.Data.Entities.ProductCategory", "ProductCategory")
+                        .WithMany("ProductInCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QDMarketPlace.Data.Entities.Product", "Product")
+                        .WithMany("ProductInCategories")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductTag", b =>
                 {
                     b.HasOne("QDMarketPlace.Data.Entities.Product", "Product")
@@ -1311,6 +1374,15 @@ namespace QDMarketPlace.Data.Migrations
                     b.HasOne("QDMarketPlace.Data.Entities.Tag", "Tag")
                         .WithMany("ProductTags")
                         .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductTranslation", b =>
+                {
+                    b.HasOne("QDMarketPlace.Data.Entities.Product", "Product")
+                        .WithMany("ProductTranslations")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

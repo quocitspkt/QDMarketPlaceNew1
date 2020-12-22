@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QDMarketPlace.Application
+namespace QDMarketPlace.Utilities
 {
     public class Class1
     {
