@@ -10,8 +10,8 @@ using QDMarketPlace.Data.EF;
 namespace QDMarketPlace.Data.Migrations
 {
     [DbContext(typeof(QDMarketPlaceDbContext))]
-    [Migration("20201222021511_changefileimage")]
-    partial class changefileimage
+    [Migration("20201222040232_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

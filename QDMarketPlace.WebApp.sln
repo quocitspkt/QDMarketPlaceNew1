@@ -13,7 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QDMarketPlace.BackendApi", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QDMarketPlace.Utilities", "QDMarketPlace.Utilities\QDMarketPlace.Utilities.csproj", "{CA65BADA-FCAB-40C0-948C-C84C83311A90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QDMarketPlace.ViewModels", "QDMarketPlace.ViewModels\QDMarketPlace.ViewModels.csproj", "{F63162A0-D3B4-49CA-AEC2-4A1C6373118E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QDMarketPlace.ViewModels", "QDMarketPlace.ViewModels\QDMarketPlace.ViewModels.csproj", "{F63162A0-D3B4-49CA-AEC2-4A1C6373118E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Infrastucture", "1. Infrastucture", "{C49B9A95-226F-481D-8753-54636FB700EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domain", "2. Domain", "{79BE7D9E-EF58-4D5D-87AD-AAC2FC89CF77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Hosts", "3. Hosts", "{F1CD2291-00D3-4AB4-8AAA-AD6486939AB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +54,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{578C04AE-358E-4082-900B-DE0C52BEE98A} = {F1CD2291-00D3-4AB4-8AAA-AD6486939AB9}
+		{33A9BD58-A248-4D65-BF27-A7F34099243C} = {79BE7D9E-EF58-4D5D-87AD-AAC2FC89CF77}
+		{B8371D44-AC51-4C3C-8385-C4FAD1753096} = {79BE7D9E-EF58-4D5D-87AD-AAC2FC89CF77}
+		{49625130-0AF9-4691-BAC6-21520D610245} = {F1CD2291-00D3-4AB4-8AAA-AD6486939AB9}
+		{CA65BADA-FCAB-40C0-948C-C84C83311A90} = {C49B9A95-226F-481D-8753-54636FB700EA}
+		{F63162A0-D3B4-49CA-AEC2-4A1C6373118E} = {C49B9A95-226F-481D-8753-54636FB700EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E7B6B0D1-34EE-4420-93FF-38BEF254335F}

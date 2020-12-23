@@ -8,4 +8,15 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QDMarketPlace.Application\QDMarketPlace.Application.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.Data\QDMarketPlace.Data.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.Utilities\QDMarketPlace.Utilities.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.ViewModels\QDMarketPlace.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\user-content\" />
+  </ItemGroup>
+
 </Project>

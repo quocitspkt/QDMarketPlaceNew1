@@ -1,9 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QDMarketPlace.Application.Catalog.Products;
+using QDMarketPlace.Application.Common;
+using QDMarketPlace.Application.System.Users;
+using QDMarketPlace.Data.EF;
+using QDMarketPlace.Data.Entities;
+using QDMarketPlace.Utilities.Constant;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +31,22 @@ namespace QDMarketPlace.BackendApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<QDMarketPlaceDbContext>(
+                 options => options.UseSqlServer(Configuration.GetConnectionString(SystemConstant.MainConnectionString)));
+
+            services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<QDMarketPlaceDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddTransient<IStorageService, FileStorageService>();
+            services.AddTransient<IPublicProductService, PublicProductService>();
+            services.AddTransient<IManageProductService, ManageProductService>();
+
+            services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<IUserService, UserService>();
+
             services.AddControllersWithViews();
 
             services.AddSwaggerGen(c =>
